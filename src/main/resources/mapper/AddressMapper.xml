@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Address">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="addrName" jdbcType="VARCHAR" property="addrname" />
+    <result column="addrtell" jdbcType="VARCHAR" property="addrtell" />
+    <result column="sheng" jdbcType="VARCHAR" property="sheng" />
+    <result column="shi" jdbcType="VARCHAR" property="shi" />
+    <result column="qu" jdbcType="VARCHAR" property="qu" />
+    <result column="detailAddr" jdbcType="VARCHAR" property="detailaddr" />
+    <result column="psotNum" jdbcType="VARCHAR" property="psotnum" />
+  </resultMap>
+</mapper>

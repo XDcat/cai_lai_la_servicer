@@ -42,7 +42,7 @@ public class MybatisConfigurer {
         //添加插件
         factory.setPlugins(new Interceptor[]{pageHelper});
 
-        //添加XML目录
+        //添加XML目录: 自动扫描xml文件
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
         return factory.getObject();
