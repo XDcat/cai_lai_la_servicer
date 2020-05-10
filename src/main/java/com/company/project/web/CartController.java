@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.Cart;
+import com.company.project.model.Product;
 import com.company.project.service.CartService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -47,10 +48,14 @@ public class CartController {
     }
 
     @PostMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<Cart> list = cartService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam Integer uid) {
+        List<Product> userCart = cartService.getUserCart(uid);
+        return ResultGenerator.genSuccessResult(userCart);
+    }
+
+    @PostMapping("/deleteCart")
+    public Result deleteUserSomeCart(@RequestParam("uid") int uid, @RequestParam("pid") int pid){
+        int res = cartService.deleteUserCart(uid, pid);
+        return ResultGenerator.genSuccessResult(res);
     }
 }
