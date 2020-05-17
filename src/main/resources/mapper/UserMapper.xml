@@ -10,5 +10,6 @@
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />
     <result column="userTel" jdbcType="VARCHAR" property="usertel" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="balance" jdbcType="REAL" property="balance" />
   </resultMap>
 </mapper>

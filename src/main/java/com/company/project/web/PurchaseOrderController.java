@@ -5,10 +5,7 @@ import com.company.project.model.PurchaseOrder;
 import com.company.project.service.PurchaseOrderService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,9 +20,9 @@ public class PurchaseOrderController {
     private PurchaseOrderService purchaseOrderService;
 
     @PostMapping("/add")
-    public Result add(PurchaseOrder purchaseOrder) {
+    public Result add(@RequestBody PurchaseOrder purchaseOrder) {
         purchaseOrderService.save(purchaseOrder);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(purchaseOrder);
     }
 
     @PostMapping("/delete")
@@ -41,16 +38,20 @@ public class PurchaseOrderController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
-        PurchaseOrder purchaseOrder = purchaseOrderService.findById(id);
+    public Result detail(@RequestParam Integer oid) {
+        PurchaseOrder purchaseOrder = purchaseOrderService.findById(oid);
         return ResultGenerator.genSuccessResult(purchaseOrder);
     }
 
     @PostMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<PurchaseOrder> list = purchaseOrderService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam Integer uid) {
+        List<PurchaseOrder> UserOrder = purchaseOrderService.getUserOrder(uid);
+        return ResultGenerator.genSuccessResult(UserOrder);
+    }
+
+    @PostMapping("/deleteOrder")
+    public Result deleteOrder(@RequestParam Integer oid){
+        int res = purchaseOrderService.deleteOrder(oid);
+        return ResultGenerator.genSuccessResult(res);
     }
 }

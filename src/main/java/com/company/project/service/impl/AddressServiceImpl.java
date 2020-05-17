@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,8 @@ public class AddressServiceImpl extends AbstractService<Address> implements Addr
     @Resource
     private AddressMapper addressMapper;
 
+    @Override
+    public List<Address> getAddressByUid(Integer uid) {
+        return addressMapper.getAddreddByUid(uid);
+    }
 }

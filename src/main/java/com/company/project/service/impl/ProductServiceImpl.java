@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,9 @@ public class ProductServiceImpl extends AbstractService<Product> implements Prod
     @Resource
     private ProductMapper productMapper;
 
+
+    @Override
+    public List<Product> filterProduct(String v, int minPrice, int maxPrice) {
+        return productMapper.filterProduct(v, minPrice, maxPrice);
+    }
 }

@@ -40,17 +40,17 @@ public class CodeGenerator {
         // genCode("输入表名");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
         genCode("user");
-        genCode("address");
-        genCode("cart");
-        genCode("discount");
-        genCode("discount_belong");
-        genCode("discount_to");
-        genCode("gender");
-        genCode("history_browser");
-        genCode("product");
-        genCode("product_class");
-        genCode("product_pic");
-        genCode("purchase_order");
+//        genCode("address");
+//        genCode("cart");
+//        genCode("discount");
+//        genCode("discount_belong");
+//        genCode("discount_to");
+//        genCode("gender");
+//        genCode("history_browser");
+//        genCode("product");
+//        genCode("product_class");
+//        genCode("product_pic");
+//        genCode("purchase_order");
     }
 
     /**
@@ -192,7 +192,7 @@ public class CodeGenerator {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            //cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
+//            cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
             cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");

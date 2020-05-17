@@ -7,6 +7,7 @@ public class User {
      * id
      */
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer uid;
 
     /**
@@ -30,6 +31,11 @@ public class User {
      * e-mail
      */
     private String email;
+
+    /**
+     * 账户余额
+     */
+    private Float balance;
 
     /**
      * 获取id
@@ -119,5 +125,23 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 获取账户余额
+     *
+     * @return balance - 账户余额
+     */
+    public Float getBalance() {
+        return balance;
+    }
+
+    /**
+     * 设置账户余额
+     *
+     * @param balance 账户余额
+     */
+    public void setBalance(Float balance) {
+        this.balance = balance;
     }
 }

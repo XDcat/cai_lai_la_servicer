@@ -5,10 +5,8 @@ import com.company.project.model.HistoryBrowser;
 import com.company.project.service.HistoryBrowserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import javafx.application.HostServices;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,9 +21,9 @@ public class HistoryBrowserController {
     private HistoryBrowserService historyBrowserService;
 
     @PostMapping("/add")
-    public Result add(HistoryBrowser historyBrowser) {
+    public Result add(@RequestBody HistoryBrowser historyBrowser) {
         historyBrowserService.save(historyBrowser);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(historyBrowser);
     }
 
     @PostMapping("/delete")
@@ -47,10 +45,8 @@ public class HistoryBrowserController {
     }
 
     @PostMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<HistoryBrowser> list = historyBrowserService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+    public Result list(@RequestParam Integer uid) {
+        List<HistoryBrowser> HistoryBrowser = historyBrowserService.getUserHistoryBrowser(uid);
+        return ResultGenerator.genSuccessResult(HistoryBrowser);
     }
 }

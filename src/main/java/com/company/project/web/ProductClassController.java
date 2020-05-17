@@ -1,6 +1,7 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.Product;
 import com.company.project.model.ProductClass;
 import com.company.project.service.ProductClassService;
 import com.github.pagehelper.PageHelper;
@@ -48,9 +49,13 @@ public class ProductClassController {
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
         List<ProductClass> list = productClassService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessResult(list);
     }
+    @PostMapping("/product")
+    public Result getProductByClass(@RequestParam Integer pcid){
+        List<Product> productByClass = productClassService.getProductByClass(pcid);
+        return ResultGenerator.genSuccessResult(productByClass);
+    }
+
 }

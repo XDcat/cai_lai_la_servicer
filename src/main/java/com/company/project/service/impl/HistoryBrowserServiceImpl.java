@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,5 @@ public class HistoryBrowserServiceImpl extends AbstractService<HistoryBrowser> i
     @Resource
     private HistoryBrowserMapper historyBrowserMapper;
 
+    public List<HistoryBrowser> getUserHistoryBrowser(int uid){ return historyBrowserMapper.getUserHistoryBrowser(uid);}
 }

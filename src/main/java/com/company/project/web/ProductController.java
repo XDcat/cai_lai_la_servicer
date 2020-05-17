@@ -1,4 +1,5 @@
 package com.company.project.web;
+
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.Product;
@@ -14,8 +15,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator_@ljzeng on 2020/05/07.
-*/
+ * Created by CodeGenerator_@ljzeng on 2020/05/07.
+ */
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -52,5 +53,14 @@ public class ProductController {
         List<Product> list = productService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @PostMapping("/filter")
+    public Result filter(@RequestParam(defaultValue = "") String key,
+                         @RequestParam(defaultValue = "0") Integer minPrice,
+                         @RequestParam(defaultValue = "99999") Integer maxPrice
+                         ) {
+        List<Product> products = productService.filterProduct(key, minPrice, maxPrice);
+        return ResultGenerator.genSuccessResult(products);
     }
 }

@@ -5,16 +5,13 @@ import com.company.project.model.User;
 import com.company.project.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator_@ljzeng on 2020/05/07.
+* Created by CodeGenerator_@ljzeng on 2020/05/16.
 */
 @RestController
 @RequestMapping("/user")
@@ -23,9 +20,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/add")
-    public Result add(User user) {
+    public Result add(@RequestBody User user) {
         userService.save(user);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @PostMapping("/delete")
@@ -35,9 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Result update(User user) {
+    public Result update(@RequestBody User user) {
         userService.update(user);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @PostMapping("/detail")

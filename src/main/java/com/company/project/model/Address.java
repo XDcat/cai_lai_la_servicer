@@ -7,6 +7,7 @@ public class Address {
      * id
      */
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer aid;
 
     /**

@@ -9,6 +9,7 @@ public class PurchaseOrder {
      * id
      */
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer oid;
 
     /**
