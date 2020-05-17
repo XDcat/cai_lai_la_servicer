@@ -9,7 +9,6 @@ public class PurchaseOrder {
      * id
      */
     @Id
-    @GeneratedValue(generator = "JDBC")
     private Integer oid;
 
     /**
@@ -33,6 +32,11 @@ public class PurchaseOrder {
      */
     @Column(name = "order_time")
     private Date orderTime;
+
+    /**
+     * 数目
+     */
+    private Integer num;
 
     /**
      * 获取id
@@ -122,5 +126,23 @@ public class PurchaseOrder {
      */
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+
+    /**
+     * 获取数目
+     *
+     * @return num - 数目
+     */
+    public Integer getNum() {
+        return num;
+    }
+
+    /**
+     * 设置数目
+     *
+     * @param num 数目
+     */
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

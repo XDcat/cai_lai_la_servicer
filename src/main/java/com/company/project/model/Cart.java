@@ -14,6 +14,8 @@ public class Cart {
      */
     private Integer pid;
 
+    private Integer num;
+
     /**
      * 获取外键，用户id
      *
@@ -48,5 +50,19 @@ public class Cart {
      */
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    /**
+     * @return num
+     */
+    public Integer getNum() {
+        return num;
+    }
+
+    /**
+     * @param num
+     */
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

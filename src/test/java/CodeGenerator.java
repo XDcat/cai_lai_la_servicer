@@ -39,9 +39,9 @@ public class CodeGenerator {
     public static void main(String[] args) {
         // genCode("输入表名");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
-        genCode("user");
+//        genCode("user");
 //        genCode("address");
-//        genCode("cart");
+        genCode("cart");
 //        genCode("discount");
 //        genCode("discount_belong");
 //        genCode("discount_to");
@@ -50,7 +50,7 @@ public class CodeGenerator {
 //        genCode("product");
 //        genCode("product_class");
 //        genCode("product_pic");
-//        genCode("purchase_order");
+        genCode("purchase_order");
     }
 
     /**
@@ -71,9 +71,9 @@ public class CodeGenerator {
      * @param modelName 自定义的 Model 名称
      */
     public static void genCodeByCustomModelName(String tableName, String modelName) {
-        genModelAndMapper(tableName, modelName);
-        genService(tableName, modelName);
-        genController(tableName, modelName);
+//        genModelAndMapper(tableName, modelName);
+//        genService(tableName, modelName);
+//        genController(tableName, modelName);
     }
 
 

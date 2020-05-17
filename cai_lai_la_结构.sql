@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 07/05/2020 20:45:27
+ Date: 17/05/2020 10:42:34
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address`  (
-  `aid` int(11) NOT NULL COMMENT 'id',
+  `aid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `uid` int(11) NULL DEFAULT NULL COMMENT '外键，用户id',
   `addrName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '收货人',
   `addrtell` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '收货人电话',
@@ -34,12 +34,7 @@ CREATE TABLE `address`  (
   PRIMARY KEY (`aid`) USING BTREE,
   INDEX `FK_delivery_address`(`uid`) USING BTREE,
   CONSTRAINT `FK_delivery_address` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of address
--- ----------------------------
-INSERT INTO `address` VALUES (1, 1, '小明', '10086', '江苏', '常州', '武进', '奔牛镇', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for cart
@@ -48,18 +43,12 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart`  (
   `uid` int(11) NOT NULL COMMENT '外键，用户id',
   `pid` int(11) NOT NULL COMMENT '外键，商品id',
+  `num` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`uid`, `pid`) USING BTREE,
   INDEX `FK_cart2`(`pid`) USING BTREE,
   CONSTRAINT `FK_cart` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_cart2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of cart
--- ----------------------------
-INSERT INTO `cart` VALUES (1, 2);
-INSERT INTO `cart` VALUES (2, 2);
-INSERT INTO `cart` VALUES (1, 3);
 
 -- ----------------------------
 -- Table structure for discount
@@ -72,14 +61,7 @@ CREATE TABLE `discount`  (
   `discountName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '优惠名称',
   `describe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '优惠描述',
   PRIMARY KEY (`did`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of discount
--- ----------------------------
-INSERT INTO `discount` VALUES (1, 5, 0.8, '满减优惠1', '购物满25减5');
-INSERT INTO `discount` VALUES (2, 15, 0.75, '满减优惠2', '购物满50减15');
-INSERT INTO `discount` VALUES (3, 30, 0.7, '满减优惠3', '购物满100减30');
+) ENGINE = InnoDB AUTO_INCREMENT = 20003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for discount_belong
@@ -92,12 +74,7 @@ CREATE TABLE `discount_belong`  (
   INDEX `FK_discount_belong2`(`did`) USING BTREE,
   CONSTRAINT `FK_discount_belong` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_discount_belong2` FOREIGN KEY (`did`) REFERENCES `discount` (`did`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of discount_belong
--- ----------------------------
-INSERT INTO `discount_belong` VALUES (1, 1);
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for discount_to
@@ -110,12 +87,7 @@ CREATE TABLE `discount_to`  (
   INDEX `FK_discount_to2`(`pid`) USING BTREE,
   CONSTRAINT `FK_discount_to` FOREIGN KEY (`did`) REFERENCES `discount` (`did`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_discount_to2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of discount_to
--- ----------------------------
-INSERT INTO `discount_to` VALUES (1, 3);
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gender
@@ -125,14 +97,7 @@ CREATE TABLE `gender`  (
   `gid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `gName` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '名称',
   PRIMARY KEY (`gid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of gender
--- ----------------------------
-INSERT INTO `gender` VALUES (1, '男');
-INSERT INTO `gender` VALUES (2, '女');
-INSERT INTO `gender` VALUES (3, '保密');
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for history_browser
@@ -141,16 +106,12 @@ DROP TABLE IF EXISTS `history_browser`;
 CREATE TABLE `history_browser`  (
   `uid` int(11) NOT NULL COMMENT '外键，用户id',
   `pid` int(11) NOT NULL COMMENT '外键，商品id',
+  `num` int(11) NOT NULL,
   PRIMARY KEY (`uid`, `pid`) USING BTREE,
   INDEX `FK_history_browser2`(`pid`) USING BTREE,
   CONSTRAINT `FK_history_browser` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_history_browser2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of history_browser
--- ----------------------------
-INSERT INTO `history_browser` VALUES (1, 1);
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product
@@ -171,14 +132,7 @@ CREATE TABLE `product`  (
   PRIMARY KEY (`pid`) USING BTREE,
   INDEX `FK_product_classify`(`pcid`) USING BTREE,
   CONSTRAINT `FK_product_classify` FOREIGN KEY (`pcid`) REFERENCES `product_class` (`pcid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of product
--- ----------------------------
-INSERT INTO `product` VALUES (1, 1, '白菜', '', 4, 5, 100, '2020-05-02 00:00:00', 7, '每斤', '2020-05-05 08:00:00');
-INSERT INTO `product` VALUES (2, 1, '萝卜', '', 25, 23, 100, '2020-05-02 00:00:00', 10, '每斤', '2020-05-05 08:00:00');
-INSERT INTO `product` VALUES (3, 1, '青菜', '', 16, 15, 80, '2020-05-02 00:00:00', 7, '每斤', '2020-05-05 00:00:00');
+) ENGINE = InnoDB AUTO_INCREMENT = 10004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product_class
@@ -188,12 +142,7 @@ CREATE TABLE `product_class`  (
   `pcid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `className` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品类型名称',
   PRIMARY KEY (`pcid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of product_class
--- ----------------------------
-INSERT INTO `product_class` VALUES (1, '蔬菜');
+) ENGINE = InnoDB AUTO_INCREMENT = 11004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product_pic
@@ -206,13 +155,7 @@ CREATE TABLE `product_pic`  (
   PRIMARY KEY (`picid`) USING BTREE,
   INDEX `FK_detailPic`(`pid`) USING BTREE,
   CONSTRAINT `FK_detailPic` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 12004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of product_pic
--- ----------------------------
-INSERT INTO `product_pic` VALUES (1, 1, 'D:\\OneDrive\\图片\\1.jpg');
-INSERT INTO `product_pic` VALUES (2, 1, 'D:\\OneDrive\\图片');
+) ENGINE = InnoDB AUTO_INCREMENT = 12004 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for purchase_order
@@ -222,6 +165,7 @@ CREATE TABLE `purchase_order`  (
   `oid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `uid` int(11) NOT NULL COMMENT '外键，用户id',
   `pid` int(11) NOT NULL COMMENT '外键，商品id',
+  `num` int(11) UNSIGNED NOT NULL DEFAULT 1 COMMENT '数目',
   `current_price` float(10, 2) NOT NULL COMMENT '成交价格',
   `order_time` datetime(0) NOT NULL COMMENT '成交时间',
   PRIMARY KEY (`oid`) USING BTREE,
@@ -230,12 +174,7 @@ CREATE TABLE `purchase_order`  (
   INDEX `fk_order1`(`pid`) USING BTREE,
   CONSTRAINT `fk_order` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_order1` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of purchase_order
--- ----------------------------
-INSERT INTO `purchase_order` VALUES (1, 1, 1, 22.00, '2020-05-07 16:01:22');
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -247,16 +186,10 @@ CREATE TABLE `user`  (
   `nickName` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '昵称',
   `userTel` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '电话',
   `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'e-mail',
+  `balance` float(255, 2) UNSIGNED NOT NULL COMMENT '账户余额',
   PRIMARY KEY (`uid`) USING BTREE,
   INDEX `FK_gender_to`(`gid`) USING BTREE,
   CONSTRAINT `FK_gender_to` FOREIGN KEY (`gid`) REFERENCES `gender` (`gid`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 33334 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 1, '张三', '13913045896', 'lalala@163.com');
-INSERT INTO `user` VALUES (2, 2, '李四', '18015479652', '12343412@qq.com');
-INSERT INTO `user` VALUES (3, 1, '王五', '13947856924', '12343214@126.com');
+) ENGINE = InnoDB AUTO_INCREMENT = 33348 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

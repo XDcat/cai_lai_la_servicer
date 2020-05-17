@@ -10,5 +10,6 @@
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="current_price" jdbcType="REAL" property="currentPrice" />
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
 </mapper>

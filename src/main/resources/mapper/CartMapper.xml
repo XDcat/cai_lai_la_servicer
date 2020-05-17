@@ -7,5 +7,6 @@
     -->
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
 </mapper>
