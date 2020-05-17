@@ -3,3 +3,5 @@
 此项目为该平台的后端，使用spring boot + mybatis 的架构， 
 [参考](https://github.com/lihengming/spring-boot-api-project-seed/stargazers)
 .
+## API文档
+https://documenter.getpostman.com/view/11279327/Szmk2G5W?version=latest
