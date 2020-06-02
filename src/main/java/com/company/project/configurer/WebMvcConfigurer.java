@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -167,6 +168,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         String sign = DigestUtils.md5Hex(linkString + secret);//混合密钥md5
 
         return StringUtils.equals(sign, requestSign);//比较
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/pictest/**")
+                .addResourceLocations("file:C:/Users/Lenovo/Pictures/Camera Roll/");
+        registry.addResourceHandler("/pic/**")
+                .addResourceLocations("file:/root/cailaila/static/");
     }
 
     private String getIpAddress(HttpServletRequest request) {

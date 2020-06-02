@@ -16,6 +16,20 @@ public class ProductClass {
     @Column(name = "className")
     private String classname;
 
+    public String getClasspic() {
+        return classpic;
+    }
+
+    public void setClasspic(String classpic) {
+        this.classpic = classpic;
+    }
+
+    /**
+     * 商品类型图片路径
+     */
+    @Column(name = "classPic")
+    private String classpic;
+
     /**
      * 获取id
      *
